@@ -1,0 +1,125 @@
+/* Reset and utility class setup */
+
+:root {
+    --white: #FAF2E7;
+    --black: #000000;
+
+    --britanica-black: "Britanica-Black";
+
+    --gutter-width: 1vw;
+    --column: 8;
+
+    --column-width: calc(calc(100vw - (var(--gutter-width) * 13)) / var(--column));
+}
+
+@font-face {
+    font-family: "Britanica-Black";
+    src: url("/assets/font/Britanica-Black\ Regular.ttf");
+    font-display: swap;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+    font-size: max(100vw / 1420 * 16);
+    
+    font-family: var(--grammatika);
+}
+
+html,
+body {
+    width: 100vw;
+    min-height: 100svh;
+    /* overflow: hidden; */
+    position: relative;
+    font-family: var(--britanica-black);
+}
+
+/* h1 {
+    font-size: 10vw;
+    background-color: red;
+    line-height: 0.8;
+} */
+
+a {
+    text-decoration: none;
+    color: var(--black);
+    text-transform: capitalize;
+    font-size: 1rem;
+    line-height: .8;
+}
+
+li {
+    list-style: none;
+    line-height: .8;
+}
+
+
+/* Grid layout overlay */
+
+.overlay {
+    opacity: 0;
+    position: fixed;
+    inset: 0 var(--gutter-width);
+    background-image: 
+        repeating-linear-gradient(
+            to right,
+            #e7a2a2,
+            #e7a2a2 calc((100% / var(--column)) - var(--gutter-width)),
+            transparent calc((100% / var(--column)) - var(--gutter-width)),
+            transparent calc(100% / var(--column))
+        );
+    background-position: left top;
+    background-size: calc(100% + var(--gutter-width)) 100%;
+    z-index: -1;  /* Change to a positive value to see overlay. */
+    transition: opacity 0.3s ease;
+}
+
+.overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 110%;
+    height: var(--gutter-width);
+    background-color: #8b484879;
+}
+
+.overlay::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 110%;
+    height: var(--gutter-width);
+    background-color: #8b484879;
+}
+
+.overlay.active {
+    opacity: 1;
+}
+
+
+/* Page styling */
+
+.wrapper {
+    width: 100vw;
+    height: 100%;
+    padding: var(--gutter-width);
+    position: relative;
+    overflow: hidden;
+}
+
+.header {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--gutter-width);  
+}
+
+.header .header__logo {
+    grid-column: span 2 / span 2;
+}
