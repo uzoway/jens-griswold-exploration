@@ -7,9 +7,9 @@
     --britanica-black: "Britanica-Black";
 
     --gutter-width: 1vw;
-    --column: 8;
+    --column: 10;
 
-    --column-width: calc(calc(100vw - (var(--gutter-width) * 13)) / var(--column));
+    --column-width: calc(calc(100vw - (var(--gutter-width) * 11)) / var(--column));
 }
 
 @font-face {
@@ -23,32 +23,25 @@
     margin: 0;
     box-sizing: border-box;
 
-    font-size: max(100vw / 1420 * 16);
-    
-    font-family: var(--grammatika);
+    font-size: calc(100vw / 1920 * 20);
 }
 
 html,
 body {
     width: 100vw;
-    min-height: 100svh;
-    /* overflow: hidden; */
+    height: 100svh;
+    overflow: hidden;
     position: relative;
     font-family: var(--britanica-black);
 }
 
-/* h1 {
-    font-size: 10vw;
-    background-color: red;
-    line-height: 0.8;
-} */
-
 a {
     text-decoration: none;
     color: var(--black);
-    text-transform: capitalize;
     font-size: 1rem;
     line-height: .8;
+    text-transform: uppercase;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 li {
@@ -112,14 +105,61 @@ li {
     padding: var(--gutter-width);
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.header {
+.wrapper__heading {
+    text-wrap: nowrap;
+    /* background-color: red; */
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    margin-top: -1rem;
+    
+}
+
+.wrapper__heading .heading__line {
+    /* overflow: hidden; */
+    display: inline-block;
+    perspective: 600px;
+}
+
+.wrapper__heading .heading__line .heading__line--text {
+    font-size: 16.9rem;
+    text-transform: capitalize;
+    /* background-color: blue; */
+    display: inline-block;
+    line-height: 0.7;
+    transform: translateY(0%);
+}
+
+.wrapper__header {
+    width: 100%;
+    padding: 0 var(--gutter-width);
+}
+
+.wrapper__header .navigation__list {
+    padding: 0 7%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.wrapper .wrapper__photos {
     display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    gap: var(--gutter-width);  
+    grid-template-columns: repeat(var(--column), minmax(0, 1fr));
+    gap: var(--gutter-width);
 }
 
-.header .header__logo {
-    grid-column: span 2 / span 2;
+.wrapper__photos .photos__item {
+    grid-column:  span 2 / span 2;
+    aspect-ratio: 1/1.2;
+}
+
+.wrapper__photos .photos__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
