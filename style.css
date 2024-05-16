@@ -3,12 +3,10 @@
 :root {
     --white: #FAF2E7;
     --black: #000000;
-
     --britanica-black: "Britanica-Black";
-
-    --gutter-width: 1vw;
+    --gutter-width: 12.5px;
     --column: 10;
-
+    --animation-primary: 0.735s cubic-bezier(0.62, 0.05, 0.01, 0.99);
     --column-width: calc(calc(100vw - (var(--gutter-width) * 11)) / var(--column));
 }
 
@@ -121,7 +119,7 @@ li {
 
 .wrapper__heading .heading__line {
     display: inline-block;
-    perspective: 600px;
+    perspective: 1000px;
 }
 
 .wrapper__heading .heading__line .heading__line--text {
@@ -129,7 +127,7 @@ li {
     text-transform: capitalize;
     display: inline-block;
     line-height: 0.7;
-    transform: translateY(0%);
+    transform: translateY(115%) rotate(5deg);
 }
 
 .wrapper__header {
@@ -144,15 +142,42 @@ li {
     width: 100%;
 }
 
+.navigation__list .list__item a {
+    overflow: hidden;
+    display: inline-block;
+}
+
+.navigation__list .list__item a span {
+    display: inline-block;
+    transform: translateY(150%) rotate(7deg);
+    will-change: transform;
+    font-size: clamp(1.25rem, 1.2rem + 0.25vw, 1.5rem);    
+    line-height: .8;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+}
+
 .wrapper .wrapper__photos {
     display: grid;
     grid-template-columns: repeat(var(--column), minmax(0, 1fr));
+    overflow: hidden;
     gap: var(--gutter-width);
 }
 
 .wrapper__photos .photos__item {
-    grid-column:  span 2 / span 2;
+    transform: translateY(-102%);
     aspect-ratio: 1/1.2;
+    position: relative;
+    overflow: hidden;
+    will-change: transform;
+}
+
+.wrapper__photos .photos__item:nth-child(3) {
+    z-index: 2;
+}
+
+.wrapper__photos .photos__item:nth-child(4) {
+    z-index: 1;
 }
 
 .wrapper__photos .photos__item img {
