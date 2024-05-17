@@ -1,26 +1,86 @@
-document.querySelector("body").addEventListener("click", () => {
-    document.querySelector(".overlay").classList.toggle("active");
+// Uncomment to be able to toggle the grid visualizer
+/* document.querySelector("body").addEventListener("click", () => {
+     document.querySelector(".overlay").classList.toggle("active");
 })
+*/
 
 
 gsap.registerPlugin(CustomEase, Flip);
-
-CustomEase.create("ease-out-quad", "0.25,0.46,0.45,0.94");
-CustomEase.create("ease-out-quart", "0.165,0.84,0.44,1");
 CustomEase.create("ease-out-cubic", "0.215,0.61,0.355,1");
-CustomEase.create("ease-in-cubic", "0.55,0.055,0.675,0.19");
-CustomEase.create("ease-in-quart", "0.895,0.03,0.685,0.22");
 
 
-CustomEase.create("ease-in-out-quad", "0.455,0.03,0.515,0.955");
-CustomEase.create("ease-in-out-cubic", "0.645,0.045,0.355,1");
-CustomEase.create("ease-in-out-quart", "0.77,0,0.175,1");
-CustomEase.create("ease-in-out-quint", "0.86,0,0.07,1");
-CustomEase.create("ease-in-out-expo", "1,0,0,1");
-CustomEase.create("ease-in-out-circ", "0.785,0.135,0.15,0.86");
+function initializeAnimation() {
+    // Position all images in the wrapper__photos container at the center
+    const gridImages = gsap.utils.toArray(".photos__item");
+    gsap.set(gridImages, { gridColumn: "5/7", gridRow: "1 / 1" });
 
 
+    // Calculate the X translate value for individual photo item
+    function calculateTranslateXValue() {
+        const offsetWidth = document.querySelector(".photos__item").offsetWidth + 12.5;
+        return `${offsetWidth}`;
+    }
 
-function initAnimation() {}
 
-window.addEventListener("DOMContentLoaded", initAnimation);
+    // Recalculate and update the photo items position when the browser is resized
+    window.addEventListener("resize", () => {
+        gsap.set(".left__items", { x: () => -calculateTranslateXValue() })
+        gsap.set(".right__items", { x: () => calculateTranslateXValue() })
+        gsap.set(".left__most--item", { x: () => -calculateTranslateXValue() * 2 })
+        gsap.set(".right__most--item", { x: () => calculateTranslateXValue() * 2 })
+    });
+
+    
+    // Page load timeline animation
+    const pageLoadTl = gsap.timeline({defaults: {
+        ease: "power1.inOut",
+        duration: 1.035
+    }});
+
+
+    pageLoadTl.to(gridImages, { 
+        yPercent: 0, 
+        y: 0, 
+        delay: 1.5, 
+    })
+    .to(".center__item img", { scale: 1, }, "<")
+
+
+    .to(".left__items", { x: () => -calculateTranslateXValue() })
+    .to(".right__items", { x: () => calculateTranslateXValue() }, "<")
+    .to(".left__items img", { scale: 1 }, "<")
+    .to(".right__items img", { scale: 1 }, "<")
+
+
+    .to(".jen__text", { 
+        yPercent: 0, 
+        y: 0, 
+        duration: 0.8, 
+        rotate: "0",
+        ease: "ease-out-cubic"
+    }, "<0.49")
+
+    .to(".list__item a span", { 
+        yPercent: 0, 
+        y: 0, 
+        rotate: 0,
+        autoAlpha: 1, 
+        stagger: 0.135,
+        ease: "ease-out-cubic"
+    })
+    .to(".griswold__text", { 
+        yPercent: 0, 
+        y: 0, 
+        duration: 0.8, 
+        rotate: "0",
+        ease: "ease-out-cubic" 
+    }, "<0.4")
+
+
+    .to(".left__most--item", { x: () => -calculateTranslateXValue() * 2 }, "<")
+    .to(".right__most--item", { x: () => calculateTranslateXValue() * 2 }, "<")
+    .to(".left__most--item img", { scale: 1 }, "<")
+    .to(".right__most--item img", { scale: 1 }, "<");
+}
+
+window.addEventListener("DOMContentLoaded", initializeAnimation);
