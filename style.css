@@ -119,7 +119,7 @@ li {
 
 .wrapper__heading .heading__line {
     display: inline-block;
-    perspective: 1000px;
+    perspective: 3000px;
 }
 
 .wrapper__heading .heading__line .heading__line--text {
@@ -127,7 +127,7 @@ li {
     text-transform: capitalize;
     display: inline-block;
     line-height: 0.7;
-    transform: translateY(115%) rotate(5deg);
+    transform: translateY(155%) rotate(15deg);
 }
 
 .wrapper__header {
@@ -166,9 +166,14 @@ li {
 
 .wrapper__photos .photos__item {
     transform: translateY(-102%);
-    aspect-ratio: 1/1.2;
+    aspect-ratio: 1/1.35;
     position: relative;
     overflow: hidden;
+    will-change: transform;
+}
+
+.wrapper__photos .photos__item img {
+    transform: scale(1.3);
     will-change: transform;
 }
 
