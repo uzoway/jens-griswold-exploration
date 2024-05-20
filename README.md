@@ -1,4 +1,8 @@
-# Jen Grisowold Personal Website
+# Jen Griswold Personal Website
+
+
+https://github.com/uzoway/jens-griswold-exploration/assets/73430874/172ab8fa-e110-4c46-b6e8-be931b487c32
+
 
 Development of a conceptual animation for the personal website of digital content creator Jen Griswold.
 Design & Motion by [Alex Tkachev](https://twitter.com/simply_aalex).
